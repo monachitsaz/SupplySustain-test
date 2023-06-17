@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SupplySustainEvaluation.Chitsaz.Common;
 
 namespace SupplySustainEvaluation.Chitsaz
 {
@@ -22,6 +23,7 @@ namespace SupplySustainEvaluation.Chitsaz
         {
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
+            services.AddScoped(typeof(ISqlUtility), typeof(SqlUtility));
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
