@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace ProductService
+namespace SupplySustainEvaluation.Chitsaz.Services
 {
         public interface IProductService : IHelper<Product>
         {     

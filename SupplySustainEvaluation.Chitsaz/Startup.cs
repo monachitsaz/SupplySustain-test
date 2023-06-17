@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repository;
 using SupplySustainEvaluation.Chitsaz.Common;
+using SupplySustainEvaluation.Chitsaz.Services;
 
 namespace SupplySustainEvaluation.Chitsaz
 {
@@ -26,6 +27,7 @@ namespace SupplySustainEvaluation.Chitsaz
             // In production, the Angular files will be served from this directory
             #region DI
             services.AddScoped(typeof(ISqlUtility), typeof(SqlUtility));
+            services.AddScoped(typeof(IProductService), typeof(ProductService));
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             #endregion
 

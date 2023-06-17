@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ProductService;
 using SupplySustainEvaluation.Chitsaz.Models;
+using SupplySustainEvaluation.Chitsaz.Services;
 using System.Threading.Tasks;
 
 namespace SupplySustainEvaluation.Chitsaz.Controllers
@@ -34,7 +34,6 @@ namespace SupplySustainEvaluation.Chitsaz.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(Product model)
         {
           
