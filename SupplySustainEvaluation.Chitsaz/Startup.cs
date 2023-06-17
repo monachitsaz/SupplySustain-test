@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Repository;
 using SupplySustainEvaluation.Chitsaz.Common;
 
 namespace SupplySustainEvaluation.Chitsaz
@@ -23,7 +24,38 @@ namespace SupplySustainEvaluation.Chitsaz
         {
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
+            #region DI
             services.AddScoped(typeof(ISqlUtility), typeof(SqlUtility));
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            #endregion
+
+            #region Cors
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SupplySustainEvaluation.Chitsaz",
+                    builder =>
+                    {
+                        //here you can give special domain or ip
+                        builder.WithOrigins("*");
+                        builder.WithHeaders("*");
+                        builder.WithMethods("*");
+
+                    });
+            });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ClientApp",
+                    builder =>
+                    {
+                        //here you can give special domain or ip
+                        builder.WithOrigins("*");
+                        builder.WithHeaders("*");
+                        builder.WithMethods("*");
+
+                    });
+            });
+            #endregion
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -52,7 +84,10 @@ namespace SupplySustainEvaluation.Chitsaz
             }
 
             app.UseRouting();
-
+            app.UseCors("SupplySustainEvaluation.Chitsaz");
+            app.UseCors("ClientApp");
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
