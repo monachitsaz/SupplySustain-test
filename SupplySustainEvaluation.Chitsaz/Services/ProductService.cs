@@ -41,11 +41,9 @@ namespace ProductService
                 {
                     var query = "[sp_Products_Insert]";
                     var dictionary = new Dictionary<string, object>();
-                    dictionary.Add("Id", model.Id);
                     dictionary.Add("Name", model.Name);
                     dictionary.Add("Description", model.Description);
    
-
                 await repository.InsertAsync(query, dictionary);
                 }
                 catch (SqlException)
