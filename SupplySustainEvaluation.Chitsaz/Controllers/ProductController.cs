@@ -47,8 +47,7 @@ namespace SupplySustainEvaluation.Chitsaz.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
-        [Authorize]
+        [HttpDelete("{id}")] 
         public async Task<IActionResult> Delete(int id)
         {          
             await _service.DeleteAsync(id);

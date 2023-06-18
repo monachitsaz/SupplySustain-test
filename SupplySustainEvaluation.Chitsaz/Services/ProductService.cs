@@ -3,6 +3,7 @@ using SupplySustainEvaluation.Chitsaz.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SupplySustainEvaluation.Chitsaz.Services
@@ -25,10 +26,24 @@ namespace SupplySustainEvaluation.Chitsaz.Services
             /// <returns>products</returns>
             public async Task<List<Product>> GetAllAsync()
             {
-                var query = "sp_Products_GetAll";
-                var result = await repository.GetAllAsync(query);
-                return result;
-            }
+                try
+                {
+                    var query = "sp_Products_GetAll";
+                    var result = await repository.GetAllAsync(query);
+                    return result;
+                }
+                catch (SqlException)
+                {
+
+                    throw;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+        }
 
             /// <summary>
             /// Create new product
